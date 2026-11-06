@@ -1,0 +1,10 @@
+[
+  {"capability":"code","source":"archive src/","outcome":"migrate","status":"done","next_action":null},
+  {"capability":"schema","source":"supabase + drizzle migrations","outcome":"migrate","status":"done","next_action":null},
+  {"capability":"records","source":"none exported","outcome":"migrate","status":"pending","next_action":"User exports per-table CSVs (profiles, projects, members, tasks, etc.) or skips"},
+  {"capability":"auth identities","source":"old Lovable Cloud email/password","outcome":"migrate","status":"pending","next_action":"User export needed; otherwise users re-register"},
+  {"capability":"authorization","source":"RLS + user_roles","outcome":"migrate","status":"done","next_action":null},
+  {"capability":"file bytes","source":"avatars bucket","outcome":"migrate","status":"pending","next_action":"Bucket created; existing photos not included in archive"},
+  {"capability":"external providers/webhooks/schedules","source":"none found","outcome":"n/a","status":"verified","next_action":null},
+  {"capability":"verification","source":"-","outcome":"-","status":"partial","next_action":"Sign-up and project flow test"}
+]
