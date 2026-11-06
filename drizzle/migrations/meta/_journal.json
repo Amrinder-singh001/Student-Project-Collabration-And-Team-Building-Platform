@@ -8,6 +8,13 @@
       "when": 1793980015069,
       "tag": "0000_profiles_roles_skills",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1793980099883,
+      "tag": "0001_projects_teams_tasks_notifications",
+      "breakpoints": true
     }
   ]
 }

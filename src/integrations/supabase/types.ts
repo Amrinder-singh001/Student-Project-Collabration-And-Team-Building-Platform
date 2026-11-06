@@ -14,6 +14,44 @@ export type Database = {
   }
   public: {
     Tables: {
+      notifications: {
+        Row: {
+          created_at: string
+          event_type: string
+          id: string
+          message: string
+          project_id: string | null
+          read_at: string | null
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          event_type: string
+          id?: string
+          message: string
+          project_id?: string | null
+          read_at?: string | null
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          event_type?: string
+          id?: string
+          message?: string
+          project_id?: string | null
+          read_at?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "notifications_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       profiles: {
         Row: {
           avatar_url: string | null
@@ -67,6 +105,233 @@ export type Database = {
           leetcode_url?: string | null
           portfolio_url?: string | null
           semester?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      project_applications: {
+        Row: {
+          applicant_id: string
+          contribution: string
+          created_at: string
+          id: string
+          motivation: string
+          project_id: string
+          relevant_skills: string
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          applicant_id: string
+          contribution: string
+          created_at?: string
+          id?: string
+          motivation: string
+          project_id: string
+          relevant_skills: string
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          applicant_id?: string
+          contribution?: string
+          created_at?: string
+          id?: string
+          motivation?: string
+          project_id?: string
+          relevant_skills?: string
+          status?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "project_applications_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      project_bookmarks: {
+        Row: {
+          created_at: string
+          project_id: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          project_id: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          project_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "project_bookmarks_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      project_members: {
+        Row: {
+          joined_at: string
+          project_id: string
+          role: string
+          user_id: string
+        }
+        Insert: {
+          joined_at?: string
+          project_id: string
+          role?: string
+          user_id: string
+        }
+        Update: {
+          joined_at?: string
+          project_id?: string
+          role?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "project_members_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      project_skills: {
+        Row: {
+          created_at: string
+          project_id: string
+          skill_id: string
+        }
+        Insert: {
+          created_at?: string
+          project_id: string
+          skill_id: string
+        }
+        Update: {
+          created_at?: string
+          project_id?: string
+          skill_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "project_skills_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "project_skills_skill_id_fkey"
+            columns: ["skill_id"]
+            isOneToOne: false
+            referencedRelation: "skills"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      project_tasks: {
+        Row: {
+          assignee_id: string | null
+          created_at: string
+          deadline: string | null
+          description: string | null
+          id: string
+          priority: string
+          project_id: string
+          status: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          assignee_id?: string | null
+          created_at?: string
+          deadline?: string | null
+          description?: string | null
+          id?: string
+          priority?: string
+          project_id: string
+          status?: string
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          assignee_id?: string | null
+          created_at?: string
+          deadline?: string | null
+          description?: string | null
+          id?: string
+          priority?: string
+          project_id?: string
+          status?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "project_tasks_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      projects: {
+        Row: {
+          additional_info: string | null
+          category: string
+          created_at: string
+          description: string
+          difficulty: string
+          duration: string
+          id: string
+          image_path: string | null
+          owner_id: string
+          status: string
+          team_size: number
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          additional_info?: string | null
+          category: string
+          created_at?: string
+          description: string
+          difficulty: string
+          duration: string
+          id?: string
+          image_path?: string | null
+          owner_id: string
+          status?: string
+          team_size: number
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          additional_info?: string | null
+          category?: string
+          created_at?: string
+          description?: string
+          difficulty?: string
+          duration?: string
+          id?: string
+          image_path?: string | null
+          owner_id?: string
+          status?: string
+          team_size?: number
+          title?: string
           updated_at?: string
         }
         Relationships: []
@@ -150,12 +415,79 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      decide_application: {
+        Args: { _accept: boolean; _application_id: string; _role?: string }
+        Returns: undefined
+      }
+      get_project_applicants: {
+        Args: { _project_id: string }
+        Returns: {
+          applicant_id: string
+          bio: string
+          college: string
+          contribution: string
+          course: string
+          created_at: string
+          full_name: string
+          github_url: string
+          id: string
+          motivation: string
+          portfolio_url: string
+          relevant_skills: string
+          semester: string
+          skills: string[]
+          status: string
+        }[]
+      }
+      get_project_owners: {
+        Args: { _ids: string[] }
+        Returns: {
+          college: string
+          course: string
+          full_name: string
+          id: string
+        }[]
+      }
+      get_project_task_stats: {
+        Args: { _ids: string[] }
+        Returns: {
+          _active: number
+          _completed: number
+          _project_id: string
+          _total: number
+        }[]
+      }
+      get_project_team: {
+        Args: { _project_id: string }
+        Returns: {
+          college: string
+          course: string
+          full_name: string
+          is_owner: boolean
+          joined_at: string
+          role: string
+          skills: string[]
+          user_id: string
+        }[]
+      }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
           _user_id: string
         }
         Returns: boolean
+      }
+      is_project_member: {
+        Args: { _project_id: string; _user_id: string }
+        Returns: boolean
+      }
+      is_project_owner: {
+        Args: { _project_id: string; _user_id: string }
+        Returns: boolean
+      }
+      sync_project_workflow: {
+        Args: { _project_id: string }
+        Returns: undefined
       }
     }
     Enums: {
