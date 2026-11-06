@@ -1,5 +1,5 @@
 import { describe, expect, it } from "bun:test";
-import { bookmarkUpsertOptions } from "../src/lib/bookmark-policy";
+import { bookmarkUpsertOptions } from "@/lib/bookmark-policy";
 
 describe("project bookmark duplicate prevention", () => {
   it("ignores repeat saves for the same user and project", () => {
