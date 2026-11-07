@@ -50,8 +50,15 @@ describe("Login and logout session", () => {
     expect(result.current.isAuthenticated).toBe(false);
     expect(result.current.user).toBeNull();
     expect(mocks.navigate).toHaveBeenCalledWith({ to: "/login", replace: true });
-    expect(mocks.cancel.mock.invocationCallOrder[0]).toBeLessThan(mocks.clear.mock.invocationCallOrder[0]);
-    expect(mocks.clear.mock.invocationCallOrder[0]).toBeLessThan(mocks.signOut.mock.invocationCallOrder[0]);
-    expect(mocks.signOut.mock.invocationCallOrder[0]).toBeLessThan(mocks.navigate.mock.invocationCallOrder[0]);
+    const cancelOrder = mocks.cancel.mock.invocationCallOrder[0];
+    const clearOrder = mocks.clear.mock.invocationCallOrder[0];
+    const signOutOrder = mocks.signOut.mock.invocationCallOrder[0];
+    const navigateOrder = mocks.navigate.mock.invocationCallOrder[0];
+    if (cancelOrder === undefined || clearOrder === undefined || signOutOrder === undefined || navigateOrder === undefined) {
+      throw new Error("Every logout cleanup step must run");
+    }
+    expect(cancelOrder).toBeLessThan(clearOrder);
+    expect(clearOrder).toBeLessThan(signOutOrder);
+    expect(signOutOrder).toBeLessThan(navigateOrder);
   });
 });

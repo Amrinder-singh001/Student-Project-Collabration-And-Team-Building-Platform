@@ -28,7 +28,7 @@ describe("Page theme", () => {
   it("restores the selected dark mode after the provider is mounted again", async () => {
     localStorage.setItem("projectconnect-theme", "dark");
     render(<ThemeProvider><Control /></ThemeProvider>);
-    await waitFor(() => expect(screen.getByTestId("toggle").dataset.theme).toBe("dark"));
+    await waitFor(() => expect(screen.getByTestId("toggle").dataset["theme"]).toBe("dark"));
     expect(document.documentElement.classList.contains("dark")).toBe(true);
   });
 });
