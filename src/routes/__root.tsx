@@ -12,7 +12,8 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { AuthProvider } from "@/hooks/useAuth";
-import { ThemeProvider, useTheme } from "@/hooks/useTheme";
+import { ThemeProvider } from "@/components/ThemeProvider";
+import { useTheme } from "@/hooks/useTheme";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { Toaster } from "@/components/ui/sonner";

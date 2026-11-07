@@ -1,6 +1,7 @@
 import { cleanup, fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { afterEach, describe, expect, it } from "vitest";
-import { ThemeProvider, useTheme } from "@/hooks/useTheme";
+import { ThemeProvider } from "@/components/ThemeProvider";
+import { useTheme } from "@/hooks/useTheme";
 
 function Control() {
   const { theme, toggleTheme } = useTheme();
