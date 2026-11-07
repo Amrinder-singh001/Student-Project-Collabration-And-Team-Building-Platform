@@ -1,9 +1,12 @@
 import { useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { Menu, X, Rocket } from "lucide-react";
+import { Menu, X, Rocket, Sun, Moon, LogOut, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { NotificationBell } from "@/components/NotificationBell";
 import { cn } from "@/lib/utils";
+import { useAuth } from "@/hooks/useAuth";
+import { useTheme } from "@/hooks/useTheme";
+import { toast } from "sonner";
 
 const links = [
   { to: "/", label: "Home" },
@@ -16,6 +19,35 @@ const links = [
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
+  const [signingOut, setSigningOut] = useState(false);
+  const { isAuthenticated, loading, signOut } = useAuth();
+  const { theme, toggleTheme } = useTheme();
+  const handleSignOut = async () => {
+    setSigningOut(true);
+    try {
+      await signOut();
+      setOpen(false);
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : "Could not log you out. Please try again.");
+    } finally {
+      setSigningOut(false);
+    }
+  };
+  const authControls = isAuthenticated ? (
+    <Button variant="ghost" size="sm" onClick={handleSignOut} disabled={signingOut}>
+      {signingOut ? <Loader2 className="animate-spin" aria-hidden="true" /> : <LogOut aria-hidden="true" />}
+      Log out
+    </Button>
+  ) : loading ? null : (
+    <>
+      <Button asChild variant="ghost" size="sm" onClick={() => setOpen(false)}>
+        <Link to="/login">Log in</Link>
+      </Button>
+      <Button asChild size="sm" onClick={() => setOpen(false)}>
+        <Link to="/register">Join free</Link>
+      </Button>
+    </>
+  );
 
   return (
     <header className="sticky top-0 z-50 border-b border-border/70 bg-background/85 backdrop-blur-md">
@@ -37,6 +69,15 @@ export function Navbar() {
         </Link>
 
         <div className="flex items-center gap-1">
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={toggleTheme}
+            aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+            title={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+          >
+            {theme === "dark" ? <Sun aria-hidden="true" /> : <Moon aria-hidden="true" />}
+          </Button>
           <ul className="hidden items-center gap-1 lg:flex">
             {links.map((link) => (
               <li key={link.to}>
@@ -54,19 +95,16 @@ export function Navbar() {
 
           <div className="ml-2 hidden items-center gap-2 md:flex">
             <NotificationBell />
-            <Button asChild variant="ghost" size="sm">
-              <Link to="/login">Log in</Link>
-            </Button>
-            <Button asChild size="sm">
-              <Link to="/register">Join free</Link>
-            </Button>
+            {authControls}
           </div>
 
           <div className="md:hidden">
             <NotificationBell />
           </div>
 
-          <button
+          <Button
+            variant="outline"
+            size="icon"
             type="button"
             onClick={() => setOpen((v) => !v)}
             aria-expanded={open}
@@ -75,7 +113,7 @@ export function Navbar() {
             className="grid h-10 w-10 shrink-0 place-items-center rounded-lg border border-border lg:hidden"
           >
             {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-          </button>
+          </Button>
         </div>
       </nav>
 
@@ -100,13 +138,8 @@ export function Navbar() {
               </Link>
             </li>
           ))}
-          <li className="mt-2 grid grid-cols-2 gap-2">
-            <Button asChild variant="outline" onClick={() => setOpen(false)}>
-              <Link to="/login">Log in</Link>
-            </Button>
-            <Button asChild onClick={() => setOpen(false)}>
-              <Link to="/register">Join free</Link>
-            </Button>
+          <li className="mt-2 grid grid-cols-2 gap-2 md:hidden">
+            {authControls}
           </li>
         </ul>
       </div>

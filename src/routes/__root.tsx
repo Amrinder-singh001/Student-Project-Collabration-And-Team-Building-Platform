@@ -12,6 +12,8 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { AuthProvider } from "@/hooks/useAuth";
+import { ThemeProvider } from "@/components/ThemeProvider";
+import { useTheme } from "@/hooks/useTheme";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { Toaster } from "@/components/ui/sonner";
@@ -82,14 +84,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "ProjectConnect" },
+      { name: "description", content: "Connect with student teammates and build projects together on ProjectConnect." },
+      { property: "og:title", content: "ProjectConnect" },
+      { property: "og:description", content: "Connect with student teammates and build projects together on ProjectConnect." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:site", content: "@Lovable" },
     ],
     links: [
       {
@@ -124,6 +124,7 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
+      <ThemeProvider>
       <AuthProvider>
         <div className="flex min-h-screen flex-col">
           <Navbar />
@@ -133,8 +134,14 @@ function RootComponent() {
           </main>
           <Footer />
         </div>
-        <Toaster />
+        <ThemedToaster />
       </AuthProvider>
+      </ThemeProvider>
     </QueryClientProvider>
   );
+}
+
+function ThemedToaster() {
+  const { theme } = useTheme();
+  return <Toaster theme={theme} />;
 }

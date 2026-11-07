@@ -9,6 +9,8 @@ import {
 } from "react";
 import type { Session, User } from "@supabase/supabase-js";
 import { supabase } from "@/integrations/supabase/client";
+import { useQueryClient } from "@tanstack/react-query";
+import { useNavigate, useRouter } from "@tanstack/react-router";
 
 export type AppRole = "student" | "admin";
 
@@ -85,6 +87,9 @@ function friendlyAuthError(message: string): string {
 }
 
 export function AuthProvider({ children }: { children: ReactNode }) {
+  const queryClient = useQueryClient();
+  const navigate = useNavigate();
+  const router = useRouter();
   const [session, setSession] = useState<Session | null>(null);
   const [user, setUser] = useState<User | null>(null);
   const [profile, setProfile] = useState<Profile | null>(null);
@@ -123,19 +128,24 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           id: r.id,
           skill_id: r.skill_id,
           level: r.level,
-          name: r.skills!.name,
-          category: r.skills!.category,
+          name: r.skills?.name ?? "",
+          category: r.skills?.category ?? null,
         })),
     );
   }, []);
 
   useEffect(() => {
-    const { data: subscription } = supabase.auth.onAuthStateChange((_event, nextSession) => {
+    const { data: subscription } = supabase.auth.onAuthStateChange((event, nextSession) => {
       setSession(nextSession);
       setUser(nextSession?.user ?? null);
+      if (event === "SIGNED_IN" || event === "SIGNED_OUT" || event === "USER_UPDATED") {
+        void router.invalidate();
+        if (event !== "SIGNED_OUT") void queryClient.invalidateQueries();
+      }
       if (!nextSession?.user) {
         setProfile(null);
         setRole(null);
+        setSkills([]);
         return;
       }
       // Defer backend reads out of the auth callback to avoid deadlocks.
@@ -150,7 +160,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     });
 
     return () => subscription.subscription.unsubscribe();
-  }, [loadUserData]);
+  }, [loadUserData, queryClient, router]);
 
   const signIn = useCallback(async (email: string, password: string) => {
     const { error } = await supabase.auth.signInWithPassword({
@@ -202,13 +212,17 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, [loadUserData]);
 
   const signOut = useCallback(async () => {
-    await supabase.auth.signOut();
+    await queryClient.cancelQueries();
+    queryClient.clear();
+    const { error } = await supabase.auth.signOut();
+    if (error) throw new Error(friendlyAuthError(error.message));
     setSession(null);
     setUser(null);
     setProfile(null);
     setSkills([]);
     setRole(null);
-  }, []);
+    await navigate({ to: "/login", replace: true });
+  }, [queryClient, navigate]);
 
   const refreshProfile = useCallback(async () => {
     if (user) await loadUserData(user.id);
