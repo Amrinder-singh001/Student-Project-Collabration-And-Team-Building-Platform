@@ -163,11 +163,16 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, [loadUserData, queryClient, router]);
 
   const signIn = useCallback(async (email: string, password: string) => {
-    const { error } = await supabase.auth.signInWithPassword({
+    const { data, error } = await supabase.auth.signInWithPassword({
       email: email.trim(),
       password,
     });
     if (error) throw new Error(friendlyAuthError(error.message));
+    const { data: blocked } = await supabase.rpc("is_blocked", { _user_id: data.user.id });
+    if (blocked) {
+      await supabase.auth.signOut();
+      throw new Error("Your account has been blocked by an administrator.");
+    }
   }, []);
 
   const signUp = useCallback(async (input: RegisterInput) => {

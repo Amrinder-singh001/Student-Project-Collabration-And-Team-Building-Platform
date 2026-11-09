@@ -20,7 +20,8 @@ const links = [
 export function Navbar() {
   const [open, setOpen] = useState(false);
   const [signingOut, setSigningOut] = useState(false);
-  const { isAuthenticated, loading, signOut } = useAuth();
+  const { isAuthenticated, loading, signOut, role } = useAuth();
+  const navLinks = role === "admin" ? [...links, { to: "/admin", label: "Admin" } as const] : links;
   const { theme, toggleTheme } = useTheme();
   const handleSignOut = async () => {
     setSigningOut(true);

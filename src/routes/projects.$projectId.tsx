@@ -12,6 +12,7 @@ import { getTaskStats, progressFromStats } from "@/lib/tasks";
 import { PROJECT_STATUSES } from "@/lib/projects";
 import { initialsFrom } from "@/lib/avatar";
 import { ApplyPanel } from "@/components/ApplyPanel";
+import { ReportProjectButton } from "@/components/ReportProjectButton";
 import { useAuth } from "@/hooks/useAuth";
 
 export const Route = createFileRoute("/projects/$projectId")({
@@ -187,6 +188,7 @@ function ProjectDetailsPage() {
                 <Link to="/projects/$projectId/tasks" params={{ projectId: project.id }}>Task board</Link>
               </Button>
               <BookmarkButton projectId={project.id} withLabel className="w-full" />
+              {!isOwner && <ReportProjectButton projectId={project.id} />}
             </CardContent>
           </Card>
 
