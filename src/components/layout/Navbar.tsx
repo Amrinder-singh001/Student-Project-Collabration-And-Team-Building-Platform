@@ -80,7 +80,7 @@ export function Navbar() {
             {theme === "dark" ? <Sun aria-hidden="true" /> : <Moon aria-hidden="true" />}
           </Button>
           <ul className="hidden items-center gap-1 lg:flex">
-            {links.map((link) => (
+            {navLinks.map((link) => (
               <li key={link.to}>
                 <Link
                   to={link.to}
@@ -126,7 +126,7 @@ export function Navbar() {
         )}
       >
         <ul className="container-page flex flex-col gap-1 py-4">
-          {links.map((link) => (
+          {navLinks.map((link) => (
             <li key={link.to}>
               <Link
                 to={link.to}

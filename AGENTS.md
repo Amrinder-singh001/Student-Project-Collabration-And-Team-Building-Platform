@@ -33,3 +33,4 @@ use the editor.
 - Persisted notifications are created by database triggers for domain events and are readable or markable only by their recipient, keeping event capture reliable and user-scoped.
 - Theme context, hook, and provider live in separate modules so component refreshes cannot replace the context identity; the provider persists the mode and pages use existing semantic tokens.
 - AuthProvider owns the single auth subscription and ordered query-cache teardown on logout; shared navigation reads session state to avoid stale login controls.
+- Admin moderation uses has_role-gated RLS policies plus a separate user_blocks table checked by is_blocked() in restrictive insert policies; blocks can't be self-cleared via profile edits.
