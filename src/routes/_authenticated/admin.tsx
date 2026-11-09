@@ -228,7 +228,7 @@ function AdminContent({ adminId }: { adminId: string }) {
         </TabsContent>
       </Tabs>
 
-      <Modal open={Boolean(viewing)} onOpenChange={(o) => !o && setViewing(null)} title={viewing?.full_name ?? "Profile"} description={viewing?.email}>
+      <Modal open={Boolean(viewing)} onOpenChange={(o) => !o && setViewing(null)} title={viewing?.full_name ?? "Profile"} description={viewing?.email ?? ""}>
         {viewing ? (
           <dl className="grid grid-cols-[auto_1fr] gap-x-4 gap-y-2 text-sm">
             <dt className="text-muted-foreground">College</dt><dd>{viewing.college ?? "—"}</dd>
