@@ -20,7 +20,8 @@ const links = [
 export function Navbar() {
   const [open, setOpen] = useState(false);
   const [signingOut, setSigningOut] = useState(false);
-  const { isAuthenticated, loading, signOut } = useAuth();
+  const { isAuthenticated, loading, signOut, role } = useAuth();
+  const navLinks = role === "admin" ? [...links, { to: "/admin", label: "Admin" } as const] : links;
   const { theme, toggleTheme } = useTheme();
   const handleSignOut = async () => {
     setSigningOut(true);
@@ -79,7 +80,7 @@ export function Navbar() {
             {theme === "dark" ? <Sun aria-hidden="true" /> : <Moon aria-hidden="true" />}
           </Button>
           <ul className="hidden items-center gap-1 lg:flex">
-            {links.map((link) => (
+            {navLinks.map((link) => (
               <li key={link.to}>
                 <Link
                   to={link.to}
@@ -125,7 +126,7 @@ export function Navbar() {
         )}
       >
         <ul className="container-page flex flex-col gap-1 py-4">
-          {links.map((link) => (
+          {navLinks.map((link) => (
             <li key={link.to}>
               <Link
                 to={link.to}
