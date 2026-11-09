@@ -208,6 +208,44 @@ export type Database = {
           },
         ]
       }
+      project_reports: {
+        Row: {
+          created_at: string
+          details: string | null
+          id: string
+          project_id: string
+          reason: string
+          reporter_id: string
+          status: string
+        }
+        Insert: {
+          created_at?: string
+          details?: string | null
+          id?: string
+          project_id: string
+          reason: string
+          reporter_id: string
+          status?: string
+        }
+        Update: {
+          created_at?: string
+          details?: string | null
+          id?: string
+          project_id?: string
+          reason?: string
+          reporter_id?: string
+          status?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "project_reports_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       project_skills: {
         Row: {
           created_at: string
@@ -389,6 +427,27 @@ export type Database = {
           },
         ]
       }
+      user_blocks: {
+        Row: {
+          blocked_by: string
+          created_at: string
+          reason: string | null
+          user_id: string
+        }
+        Insert: {
+          blocked_by: string
+          created_at?: string
+          reason?: string | null
+          user_id: string
+        }
+        Update: {
+          blocked_by?: string
+          created_at?: string
+          reason?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
       user_roles: {
         Row: {
           created_at: string
@@ -477,6 +536,7 @@ export type Database = {
         }
         Returns: boolean
       }
+      is_blocked: { Args: { _user_id: string }; Returns: boolean }
       is_project_member: {
         Args: { _project_id: string; _user_id: string }
         Returns: boolean
