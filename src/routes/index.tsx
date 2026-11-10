@@ -10,7 +10,7 @@ import {
   MessageSquare,
   Trophy,
 } from "lucide-react";
-import heroImage from "@/assets/hero-students.jpg";
+import heroImage from "@/assets/students-collaborating-laptop.jpg.asset.json";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { DiscoveryCard } from "@/components/DiscoveryCard";
@@ -88,22 +88,27 @@ function HomePage() {
     <div>
       {/* Hero */}
       <section className="surface-hero relative overflow-hidden">
-        <div className="container-page grid gap-12 py-16 lg:grid-cols-[1.05fr_1fr] lg:items-center lg:py-24">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 opacity-[0.07] [background-image:linear-gradient(var(--color-ink-foreground)_1px,transparent_1px),linear-gradient(90deg,var(--color-ink-foreground)_1px,transparent_1px)] [background-size:56px_56px] [mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_75%)]"
+        />
+        <div className="container-page relative grid gap-14 pb-24 pt-14 sm:pt-20 lg:grid-cols-[1.02fr_1fr] lg:items-center lg:gap-16 lg:pb-28 lg:pt-24">
           <div className="min-w-0">
-            <SkillBadge className="border-ink-foreground/20 bg-ink-foreground/10 text-ink-foreground">
+            <SkillBadge className="glass-ink border-ink-foreground/20 bg-ink-foreground/10 px-3.5 py-1.5 text-ink-foreground">
+              <span className="h-1.5 w-1.5 rounded-full bg-accent shadow-[0_0_10px_var(--color-accent)]" aria-hidden="true" />
               For college builders, everywhere
             </SkillBadge>
-            <h1 className="mt-5 text-4xl font-bold leading-[1.05] sm:text-5xl lg:text-6xl">
+            <h1 className="mt-6 text-[2.6rem] font-extrabold leading-[1.02] tracking-[-0.035em] sm:text-6xl lg:text-[4.25rem]">
               Find Your Team.
               <br />
               <span className="text-gradient">Build Something Great.</span>
             </h1>
-            <p className="mt-5 max-w-xl text-base leading-relaxed text-ink-foreground/75 sm:text-lg">
+            <p className="mt-6 max-w-xl text-base leading-relaxed text-ink-foreground/72 sm:text-lg">
               ProjectConnect is where students turn late-night ideas into shipped products —
               match on skills, join real projects and collaborate with people who actually
               show up.
             </p>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+            <div className="mt-9 flex flex-col gap-3 sm:flex-row">
               <Button asChild size="lg">
                 <Link to="/projects">
                   Explore projects
@@ -114,24 +119,24 @@ function HomePage() {
                 asChild
                 size="lg"
                 variant="outline"
-                className="border-ink-foreground/25 bg-transparent text-ink-foreground hover:bg-ink-foreground/10 hover:text-ink-foreground"
+                className="glass-ink border-ink-foreground/20 bg-ink-foreground/10 text-ink-foreground hover:border-ink-foreground/30 hover:bg-ink-foreground/15 hover:text-ink-foreground"
               >
                 <Link to="/register">Create your profile</Link>
               </Button>
             </div>
-            <dl className="mt-10 grid max-w-lg grid-cols-3 gap-6">
+            <dl className="glass-ink mt-11 grid max-w-lg grid-cols-3 divide-x divide-ink-foreground/12 rounded-2xl border py-4">
               {[
                 { value: "4,800+", label: "Student builders" },
                 { value: "1,200+", label: "Active projects" },
                 { value: "62", label: "Campuses" },
               ].map((s) => (
-                <div key={s.label} className="min-w-0">
+                <div key={s.label} className="min-w-0 px-4 sm:px-5">
                   <dt className="sr-only">{s.label}</dt>
                   <dd>
-                    <span className="block font-display text-2xl font-bold sm:text-3xl">
+                    <span className="block font-display text-2xl font-extrabold tracking-tight sm:text-3xl">
                       {s.value}
                     </span>
-                    <span className="mt-1 block text-xs text-ink-foreground/65">{s.label}</span>
+                    <span className="mt-1 block text-xs text-ink-foreground/60">{s.label}</span>
                   </dd>
                 </div>
               ))}
@@ -139,24 +144,30 @@ function HomePage() {
           </div>
 
           <div className="relative min-w-0">
-            <div className="overflow-hidden rounded-3xl border border-ink-foreground/15 shadow-lift">
-              <img
-                src={heroImage}
-                width={1536}
-                height={1024}
-                alt="Students collaborating on a project around a laptop"
-                className="h-full w-full object-cover"
-              />
+            <div
+              aria-hidden="true"
+              className="absolute -inset-6 rounded-[2.5rem] bg-primary/30 blur-3xl"
+            />
+            <div className="glass-ink relative rounded-[2rem] border p-2 shadow-lift">
+              <div className="overflow-hidden rounded-[1.6rem]">
+                <img
+                  src={heroImage.url}
+                  width={1536}
+                  height={1152}
+                  alt="Students collaborating on a project around a laptop"
+                  className="aspect-[4/3] h-full w-full object-cover transition-transform duration-700 ease-out hover:scale-[1.03]"
+                />
+              </div>
             </div>
-            <div className="absolute -bottom-6 left-4 hidden w-64 rounded-2xl border border-border bg-card p-4 shadow-lift sm:block">
-              <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
+            <div className="glass-strong absolute -bottom-7 left-4 hidden w-64 rounded-2xl border p-4 transition-transform duration-300 hover:-translate-y-1 sm:block">
+              <p className="text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground">
                 Match found
               </p>
               <p className="mt-1 text-sm font-semibold text-card-foreground">
                 94% fit · Backend Engineer
               </p>
-              <div className="mt-2 h-1.5 w-full overflow-hidden rounded-full bg-secondary">
-                <div className="h-full w-[94%] rounded-full bg-primary" />
+              <div className="mt-2.5 h-1.5 w-full overflow-hidden rounded-full bg-secondary">
+                <div className="h-full w-[94%] rounded-full bg-gradient-primary" />
               </div>
             </div>
           </div>
@@ -166,19 +177,19 @@ function HomePage() {
       {/* How it works */}
       <section className="container-page py-16 lg:py-24" aria-labelledby="how-it-works">
         <div className="max-w-2xl">
-          <p className="text-sm font-semibold uppercase tracking-wider text-primary">
+          <p className="text-xs font-bold uppercase tracking-[0.16em] text-primary">
             How it works
           </p>
-          <h2 id="how-it-works" className="mt-3 text-3xl font-bold sm:text-4xl">
+          <h2 id="how-it-works" className="mt-3 text-3xl font-extrabold tracking-[-0.03em] sm:text-[2.6rem] sm:leading-[1.1]">
             Three steps from idea to team
           </h2>
         </div>
         <ol className="mt-10 grid gap-6 md:grid-cols-3">
           {steps.map((step, i) => (
             <li key={step.title}>
-              <Card className="h-full shadow-soft">
+              <Card className="card-hover h-full">
                 <CardHeader className="gap-3">
-                  <span className="grid h-11 w-11 place-items-center rounded-xl bg-primary/10 text-primary">
+                  <span className="grid h-11 w-11 place-items-center rounded-xl border border-primary/15 bg-primary/10 text-primary">
                     <step.icon className="h-5 w-5" aria-hidden="true" />
                   </span>
                   <h3 className="text-lg font-semibold">
@@ -196,14 +207,14 @@ function HomePage() {
       </section>
 
       {/* Featured projects */}
-      <section className="bg-secondary/40 py-16 lg:py-24" aria-labelledby="featured">
+      <section className="border-y border-[color:var(--glass-border)] bg-[color:var(--glass)] py-16 backdrop-blur-sm lg:py-24" aria-labelledby="featured">
         <div className="container-page">
           <div className="grid gap-4 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-end">
             <div className="min-w-0">
-              <p className="text-sm font-semibold uppercase tracking-wider text-primary">
+              <p className="text-xs font-bold uppercase tracking-[0.16em] text-primary">
                 Recruiting now
               </p>
-              <h2 id="featured" className="mt-3 text-3xl font-bold sm:text-4xl">
+              <h2 id="featured" className="mt-3 text-3xl font-extrabold tracking-[-0.03em] sm:text-[2.6rem] sm:leading-[1.1]">
                 Projects looking for teammates
               </h2>
             </div>
@@ -215,9 +226,9 @@ function HomePage() {
             </Button>
           </div>
           {projectsLoading ? (
-            <p className="text-sm text-muted-foreground">Loading projects…</p>
+            <p className="mt-10 text-sm text-muted-foreground">Loading projects…</p>
           ) : featured.length === 0 ? (
-            <Card className="shadow-soft">
+            <Card className="mt-10">
               <CardContent className="flex flex-col items-start gap-3 pt-6">
                 <p className="text-sm text-muted-foreground">
                   No projects have been posted yet — be the first to share one.
@@ -240,19 +251,19 @@ function HomePage() {
       {/* Features */}
       <section className="container-page py-16 lg:py-24" aria-labelledby="why">
         <div className="max-w-2xl">
-          <p className="text-sm font-semibold uppercase tracking-wider text-primary">
+          <p className="text-xs font-bold uppercase tracking-[0.16em] text-primary">
             Why ProjectConnect
           </p>
-          <h2 id="why" className="mt-3 text-3xl font-bold sm:text-4xl">
+          <h2 id="why" className="mt-3 text-3xl font-extrabold tracking-[-0.03em] sm:text-[2.6rem] sm:leading-[1.1]">
             Everything a student team needs, in one place
           </h2>
         </div>
         <ul className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {features.map((f) => (
             <li key={f.title}>
-              <Card className="h-full shadow-soft">
+              <Card className="card-hover h-full">
                 <CardHeader className="gap-3">
-                  <span className="grid h-11 w-11 place-items-center rounded-xl bg-accent/15 text-accent-foreground">
+                  <span className="grid h-11 w-11 place-items-center rounded-xl border border-accent/25 bg-accent/15 text-accent-foreground">
                     <f.icon className="h-5 w-5" aria-hidden="true" />
                   </span>
                   <h3 className="text-base font-semibold">{f.title}</h3>
@@ -268,8 +279,8 @@ function HomePage() {
 
       {/* CTA */}
       <section className="container-page pb-8">
-        <div className="surface-hero grid gap-6 rounded-3xl px-6 py-12 text-center shadow-lift sm:px-12 lg:py-16">
-          <h2 className="text-3xl font-bold sm:text-4xl">Your next team is one click away</h2>
+        <div className="surface-hero relative grid gap-6 overflow-hidden rounded-[2rem] px-6 py-14 text-center shadow-lift sm:px-12 lg:py-20">
+          <h2 className="text-3xl font-extrabold tracking-[-0.03em] sm:text-[2.6rem]">Your next team is one click away</h2>
           <p className="mx-auto max-w-xl text-ink-foreground/75">
             Join thousands of students turning coursework, hackathon hacks and side ideas into
             real, shipped products.
@@ -282,7 +293,7 @@ function HomePage() {
               asChild
               size="lg"
               variant="outline"
-              className="border-ink-foreground/25 bg-transparent text-ink-foreground hover:bg-ink-foreground/10 hover:text-ink-foreground"
+              className="glass-ink border-ink-foreground/20 bg-ink-foreground/10 text-ink-foreground hover:border-ink-foreground/30 hover:bg-ink-foreground/15 hover:text-ink-foreground"
             >
               <Link to="/about">Learn more</Link>
             </Button>

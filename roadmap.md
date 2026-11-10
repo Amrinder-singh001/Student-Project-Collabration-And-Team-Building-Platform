@@ -10,3 +10,4 @@
 - [x] Admin dashboard (stats, users/block, projects/remove, applications, reports)
 
 - [x] Sample projects on Explore; new sign-ups get a profile and student role automatically.
+- [x] Styling-only glassmorphism redesign across all pages with a real hero photo.
