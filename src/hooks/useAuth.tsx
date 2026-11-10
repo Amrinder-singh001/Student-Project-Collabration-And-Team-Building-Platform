@@ -202,17 +202,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       throw new Error("Check your inbox to confirm your email, then log in.");
     }
 
-    const { error: profileError } = await supabase.from("profiles").insert({
-      id: newUser.id,
-      full_name: input.fullName,
-      email,
-      college: input.college,
-      course: input.course,
-      semester: input.semester,
-    });
-    if (profileError) throw new Error(profileError.message);
-
-    await supabase.from("user_roles").insert({ user_id: newUser.id, role: "student" });
+    // The profile and student role are created by a database trigger on sign-up.
     await loadUserData(newUser.id);
   }, [loadUserData]);
 

@@ -336,6 +336,7 @@ export type Database = {
           duration: string
           id: string
           image_path: string | null
+          is_sample: boolean
           owner_id: string
           status: string
           team_size: number
@@ -351,6 +352,7 @@ export type Database = {
           duration: string
           id?: string
           image_path?: string | null
+          is_sample?: boolean
           owner_id: string
           status?: string
           team_size: number
@@ -366,6 +368,7 @@ export type Database = {
           duration?: string
           id?: string
           image_path?: string | null
+          is_sample?: boolean
           owner_id?: string
           status?: string
           team_size?: number
