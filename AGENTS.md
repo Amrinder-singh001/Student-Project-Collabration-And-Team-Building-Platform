@@ -34,3 +34,5 @@ use the editor.
 - Theme context, hook, and provider live in separate modules so component refreshes cannot replace the context identity; the provider persists the mode and pages use existing semantic tokens.
 - AuthProvider owns the single auth subscription and ordered query-cache teardown on logout; shared navigation reads session state to avoid stale login controls.
 - Admin moderation uses has_role-gated RLS policies plus a separate user_blocks table checked by is_blocked() in restrictive insert policies; blocks can't be self-cleared via profile edits.
+- New accounts get their profile and student role from the handle_new_user trigger on auth.users, so sign-up works even when email confirmation leaves no client session.
+- Seeded demo projects are flagged with projects.is_sample so they can be found or removed later without touching student-created projects.
