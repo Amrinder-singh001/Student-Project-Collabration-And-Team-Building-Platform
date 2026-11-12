@@ -37,3 +37,4 @@ use the editor.
 - New accounts get their profile and student role from the handle_new_user trigger on auth.users, so sign-up works even when email confirmation leaves no client session.
 - Seeded demo projects are flagged with projects.is_sample so they can be found or removed later without touching student-created projects.
 - Glass surfaces come from tokens and `glass`/`glass-strong`/`glass-ink` utilities in src/styles.css, applied centrally in the shadcn primitives; this keeps the look consistent and themeable without per-page colour classes.
+- Images the site displays are bundled files imported from src/assets, not CDN .asset.json pointers, because the app is also deployed outside Lovable (Vercel) where pointer URLs don't resolve.

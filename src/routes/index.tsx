@@ -10,7 +10,7 @@ import {
   MessageSquare,
   Trophy,
 } from "lucide-react";
-import heroImage from "@/assets/students-collaborating-laptop.jpg.asset.json";
+import heroImage from "@/assets/students-team-laptops.jpg";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { DiscoveryCard } from "@/components/DiscoveryCard";
@@ -151,10 +151,10 @@ function HomePage() {
             <div className="glass-ink relative rounded-[2rem] border p-2 shadow-lift">
               <div className="overflow-hidden rounded-[1.6rem]">
                 <img
-                  src={heroImage.url}
-                  width={1536}
-                  height={1152}
-                  alt="Students collaborating on a project around a laptop"
+                  src={heroImage}
+                  width={1600}
+                  height={906}
+                  alt="Four university students collaborating on a project around their laptops"
                   className="aspect-[4/3] h-full w-full object-cover transition-transform duration-700 ease-out hover:scale-[1.03]"
                 />
               </div>
