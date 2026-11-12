@@ -86,7 +86,7 @@ export function Navbar() {
                   to={link.to}
                   activeOptions={{ exact: link.to === "/" }}
                   className="block rounded-full px-3.5 py-1.5 text-sm font-medium text-muted-foreground transition-all duration-200 hover:bg-secondary/80 hover:text-foreground"
-                  activeProps={{ className: "!text-foreground bg-background shadow-soft" }}
+                  activeProps={{ className: "!text-foreground bg-raised shadow-soft" }}
                 >
                   {link.label}
                 </Link>

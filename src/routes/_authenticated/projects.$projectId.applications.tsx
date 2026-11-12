@@ -105,7 +105,7 @@ function ApplicantCard({ a, projectId }: { a: Applicant; projectId: string }) {
             {a.status === "Pending" && (
               <>
                 <label className="sr-only" htmlFor={`role-${a.id}`}>Team role</label>
-                <select id={`role-${a.id}`} value={role} onChange={(e) => setRole(e.target.value as TeamRole)} className="h-9 rounded-md border border-input bg-background px-2 text-sm">
+                <select id={`role-${a.id}`} value={role} onChange={(e) => setRole(e.target.value as TeamRole)} className="h-9 rounded-md border border-input bg-card px-2 text-sm">
                   {TEAM_ROLES.map((r) => <option key={r}>{r}</option>)}
                 </select>
                 <Button size="sm" disabled={busy} onClick={() => decide(true)}>Accept</Button>

@@ -158,7 +158,7 @@ export function TaskBoard({ projectId }: { projectId: string }) {
                         draggable={canMove}
                         onDragStart={() => setDragging(task.id)}
                         onDragEnd={() => setDragging(null)}
-                        className={`rounded-xl border border-border bg-background p-3 shadow-soft ${canMove ? "cursor-grab active:cursor-grabbing" : ""}`}
+                        className={`rounded-xl border border-border bg-raised p-3 shadow-soft ${canMove ? "cursor-grab active:cursor-grabbing" : ""}`}
                       >
                         <div className="flex items-start justify-between gap-2">
                           <h4 className="min-w-0 text-sm font-semibold leading-snug">{task.title}</h4>
@@ -363,7 +363,7 @@ function TaskFormModal({
             <Label htmlFor="task-assignee">Assigned team member</Label>
             <select
               id="task-assignee"
-              className="h-9 w-full rounded-md border border-input bg-background px-2 text-sm"
+              className="h-9 w-full rounded-md border border-input bg-card px-2 text-sm"
               value={values.assigneeId}
               onChange={(e) => set("assigneeId", e.target.value)}
             >
@@ -380,7 +380,7 @@ function TaskFormModal({
             <Label htmlFor="task-priority">Priority</Label>
             <select
               id="task-priority"
-              className="h-9 w-full rounded-md border border-input bg-background px-2 text-sm"
+              className="h-9 w-full rounded-md border border-input bg-card px-2 text-sm"
               value={values.priority}
               onChange={(e) => set("priority", e.target.value)}
             >
@@ -407,7 +407,7 @@ function TaskFormModal({
             <Label htmlFor="task-status">Status</Label>
             <select
               id="task-status"
-              className="h-9 w-full rounded-md border border-input bg-background px-2 text-sm"
+              className="h-9 w-full rounded-md border border-input bg-card px-2 text-sm"
               value={values.status}
               onChange={(e) => set("status", e.target.value)}
             >

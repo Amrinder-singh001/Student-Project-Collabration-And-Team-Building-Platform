@@ -11,3 +11,4 @@
 
 - [x] Sample projects on Explore; new sign-ups get a profile and student role automatically.
 - [x] Styling-only glassmorphism redesign across all pages with a real hero photo.
+- [ ] Dark/light theme consistency pass: unified navy/slate surfaces, states, no theme flash, every page.

@@ -63,7 +63,7 @@ function TeamPage() {
                     <label className="sr-only" htmlFor={`role-${m.user_id}`}>Role</label>
                     <select
                       id={`role-${m.user_id}`}
-                      className="h-9 rounded-md border border-input bg-background px-2 text-sm"
+                      className="h-9 rounded-md border border-input bg-card px-2 text-sm"
                       value={m.role}
                       onChange={async (e) => {
                         try { await updateMemberRole(projectId, m.user_id, e.target.value as TeamRole); toast.success("Role updated"); refresh(); }
