@@ -1,5 +1,7 @@
 # Roadmap
 
+- [ ] Fix the four selected public-read security findings; awaiting approval to make project browsing sign-in-only and limit membership details to authorized users.
+
 - [x] Add persistent light/dark mode without redesigning existing pages.
 - [x] Show session-aware login/logout controls and verify sign-out.
 
